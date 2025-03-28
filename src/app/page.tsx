@@ -20,13 +20,29 @@ export default function Home() {
     error: false,
   });
 
+  // Text-to-Speech Function
+  const textToSpeech = (text: string) => {
+    if (!window.speechSynthesis) {
+      console.error("Speech Synthesis not supported in this browser.");
+      return;
+    }
+
+    // Stop previous speech before starting new one
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "en-US";
+    utterance.rate = 1;
+    utterance.pitch = 1;
+    utterance.onend = () => setPlay(false);
+
+    window.speechSynthesis.speak(utterance);
+  };
   // Fetch Advice API
   const fetchData = async () => {
     setStatus((prev) => ({ ...prev, loading: true }));
     try {
-      const response = await fetch(
-        `https://api.adviceslip.com/advice/${index}`
-      );
+      const response = await fetch(`https://api.adviceslip.com/advice`);
       const resp = await response.json();
 
       if (response.ok && resp.slip) {
@@ -47,25 +63,6 @@ export default function Home() {
     setPlay(true);
   }, [index]);
 
-  // Text-to-Speech Function
-  const textToSpeech = (text: string) => {
-    if (!window.speechSynthesis) {
-      console.error("Speech Synthesis not supported in this browser.");
-      return;
-    }
-
-    // Stop previous speech before starting new one
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "en-US";
-    utterance.rate = 1;
-    utterance.pitch = 1;
-    utterance.onend = () => setPlay(false);
-
-    window.speechSynthesis.speak(utterance);
-  };
-
   // Play/Pause Speech
   const handlePauseandPlay = () => {
     if (play) {
@@ -77,8 +74,8 @@ export default function Home() {
   };
 
   return (
-    <main className="flex items-center justify-center w-full min-h-screen bg-gray-400 dark:bg-blue-dark dark:text-foreground">
-      <section className="relative flex flex-col gap-4 items-center shadow w-full max-w-md bg-slate-400 dark:bg-blue-darkg rounded-lg p-4 pt-10 pb-14">
+    <main className="sm:flex items-center justify-center w-full min-h-screen bg-gray-400 dark:bg-blue-dark dark:text-foreground">
+      <section className="relative flex flex-col gap-4 items-center shadow w-full sm:max-w-md sm:bg-slate-400 sm:dark:bg-blue-darkg rounded-lg p-4 pt-10 pb-14">
         <div className="w-full flex justify-between px-4">
           <h2 className="text-secondary font-bold text-lg ">
             Advice Generator
