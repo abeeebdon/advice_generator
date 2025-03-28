@@ -533,6 +533,12 @@ video {
 .min-h-screen {
   min-height: 100vh;
 }
+.min-h-\[40px\] {
+  min-height: 40px;
+}
+.min-h-\[50px\] {
+  min-height: 50px;
+}
 .w-fit {
   width: fit-content;
 }
