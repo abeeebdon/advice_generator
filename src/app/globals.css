@@ -1,10 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --dark-foreground: #ededed;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,4 +19,17 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+} */
+.advice-button {
+  position: absolute;
+  bottom: -30px;
+  cursor: pointer;
+  width: fit-content;
+  padding: 16px;
+  border-radius: 50%;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.advice-button:hover {
+  box-shadow: 0 0 30px hsl(150, 100%, 66%); /* Adjust color and intensity */
 }
