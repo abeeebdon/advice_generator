@@ -88,7 +88,7 @@ export default function Home() {
             />
           </div>
         </div>
-        <p className="text-secondary uppercase ">Advice # {advice?.id}</p>
+        <p className="text-secondary uppercase ">Advice # {index}</p>
         <p className="w-full flex justify-center items-center min-h-[50px] text-lg text-center px-2">
           {status.loading
             ? "Loading ... "
